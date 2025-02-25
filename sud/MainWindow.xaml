@@ -9,7 +9,7 @@
         MouseDown="Drag"
         x:Name="win"
         ResizeMode="NoResize"
-        AllowsTransparency="False"
+        AllowsTransparency="True"
         Title="Sudoku" Height="600" Width="600" WindowStyle="None"
         Loaded="Startup" Icon="/IMG20230716143054.jpg">
     <Window.Resources>
