@@ -1,0 +1,151 @@
+﻿<Window x:Class="sud.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:sud"
+        xmlns:uc="clr-namespace:sudb"
+        mc:Ignorable="d"
+        MouseDown="Drag"
+        x:Name="win"
+        ResizeMode="NoResize"
+        AllowsTransparency="False"
+        Title="Sudoku" Height="600" Width="600" WindowStyle="None"
+        Loaded="Startup" Icon="/IMG20230716143054.jpg">
+    <Window.Resources>
+        <!--ControlTemplate x:Key="test" TargetType="Button">
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                    To="{TemplateBinding Background}"
+                    Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                    To="{DynamicResource back}" 
+                    Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
+                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+            </Grid>
+        </ControlTemplate-->
+        <ControlTemplate x:Key="close" TargetType="Button">
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                            To="#00000000"
+                            Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                            To="Red" 
+                            Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
+                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="minim" TargetType="Button">
+            <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup Name="CommonStates">
+                        <VisualState Name="Normal">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
+                    To="{TemplateBinding Background}"
+                    Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
+                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
+                    To="#aa555555" 
+                    Duration="0:0:0.04"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
+                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,600,600" RadiusX="15" RadiusY="15"/>
+    </Window.Clip>
+    <Grid x:Name="Layoot">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,0.0565" StartPoint="0.5,0" Opacity="1">
+                <GradientStop x:Name="gsup" Color="#151515" Offset="0.8"/>
+                <GradientStop x:Name="gsdw" Color="#222222" Offset="0.85"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock Grid.RowSpan ="100" Grid.ColumnSpan="100" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="20,25,0,0" Foreground="#FFFFFF" Height="40"/>
+        <Button FontSize="14" Grid.RowSpan ="100" Grid.ColumnSpan="100"  Width="74" Margin="0,0,220,25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Solve" Background="#5020F0" Foreground="#CCCCCC" BorderThickness="0" Click="Press" Height="20">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button FontSize="14" Grid.ColumnSpan ="100" Grid.RowSpan="100" Width="74" Height="20" Margin="220,0,0,25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Clear" Background="#5020f0" Foreground="#cccccc" BorderThickness="0" Click="Clear_butn">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
+        <Button x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource close}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="-0.4,-2.6,0,0" FontSize="20" Content="X" Click="Close_bybtn"/>
+        <Button x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource minim}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="0,-11.16,0,0" FontSize="30" Content="-" Click="Minim_bybtn" Margin="0,0,45,0"/>
+        <uc:Buttn x:Name="Btn" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,220,35" MouseLeftButtonUp="Buttn_MouseLeftButtonUp"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="36"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>
