@@ -27,8 +27,8 @@ namespace sud
             {
                 Tb[i] = new TextBox();
                 Layoot.Children.Add(Tb[i]);
-                Grid.SetColumn(Tb[i], (i % 9) + 1);
-                Grid.SetRow(Tb[i], (i / 9) + 1);
+                Grid.SetColumn(Tb[i], (i % 9) + 1 + (i % 9));
+                Grid.SetRow(Tb[i], (i / 9) + 1 + (i / 9));
                 Tb[i].FontSize = 50;
                 Tb[i].Name = "tb" + i.ToString();
                 RegisterName("tb" + i.ToString(), Tb[i]);
