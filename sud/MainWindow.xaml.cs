@@ -20,6 +20,7 @@ namespace sud
         {
             InitializeComponent();
             Btn.Btn_size = new Rect(0, 0, Btn.Width, Btn.Height);
+            Btn2.Btn_size = new Rect(0, 0, Btn2.Width, Btn2.Height);
         }
 
         private void Startup(object sender, RoutedEventArgs e)
@@ -39,8 +40,7 @@ namespace sud
                 Tb[i].TextAlignment = TextAlignment.Center;
                 Tb[i].Padding = new Thickness(0, -13, 0, 0);
                 Tb[i].TextChanged += new TextChangedEventHandler(Err);
-            }
-
+            } 
         }
         private void Close_bybtn(object sender, RoutedEventArgs e)
         {
@@ -218,7 +218,11 @@ namespace sud
         } 
         private void Buttn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //Close();
+            Close();
+        }
+        private void Buttn_MouseLeftButtonUp2(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

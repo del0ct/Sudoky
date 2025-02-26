@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -13,20 +15,21 @@ namespace sudb
     /// </summary>
     public partial class Buttn : UserControl
     {
-
         public Buttn()
         {
             InitializeComponent();
             this.DataContext = this;
             SetValue(DefaultButtonTextAttribute, "Btn");
         }
+
         public static readonly DependencyProperty BackgroundMouseOverProperty = DependencyProperty.Register("Background_MouseOver", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(190, 230, 253)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
         public static readonly DependencyProperty BackgroundDefaultProperty = DependencyProperty.Register("Default_Background", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(230, 230, 230)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
-        public static readonly DependencyProperty DefaultButtonTextAttribute = DependencyProperty.Register("DefaultButtontText", typeof(string), typeof(TextBlock));
+        public static readonly DependencyProperty DefaultButtonTextAttribute = DependencyProperty.Register("DefaultButtontText", typeof(string), typeof(TextBlock),new PropertyMetadata("Btn"));
         public static readonly DependencyProperty ButtonSizeAttribute = DependencyProperty.Register("Btn_Size", typeof(Rect), typeof(RectangleGeometry), new PropertyMetadata(new Rect(0, 0, 300, 300)));
         public static readonly DependencyProperty RoundStrengthProperty = DependencyProperty.Register("RoundStrengt", typeof(double), typeof(RectangleGeometry), new PropertyMetadata((double)0));
         public static readonly DependencyProperty TimeToColorChangeProperty = DependencyProperty.Register("TimeColorChange", typeof(double), typeof(ColorAnimation), new PropertyMetadata((double)0));
-
+        public bool Click_Down = false;
+       
         [Bindable(true)]
         [Category("Btn")]
         public double RoundStrength
@@ -39,7 +42,7 @@ namespace sudb
         public Rect Btn_size
         {
             get { return (Rect)GetValue(ButtonSizeAttribute); }
-            set { SetValue(ButtonSizeAttribute, value); }// SetValue(ButtonSizeAttribute, value); }
+            set { SetValue(ButtonSizeAttribute, value); }
         }
         [Bindable(true)]
         [Category("text")]
@@ -70,15 +73,13 @@ namespace sudb
             set { SetValue(TimeToColorChangeProperty, value); }
         }
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-
+        { 
             ColorAnimation Go = new ColorAnimation();
             Go.From = (bb.Background as SolidColorBrush).Color;
             Go.To = (Color_MouseOver as SolidColorBrush).Color;
             Go.Duration = TimeSpan.FromMilliseconds(TimeColorChange);
             bb.Background = new SolidColorBrush((bb.Background as SolidColorBrush).Color);
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
-            //bb.Background = Bbac;
         }
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
@@ -89,8 +90,7 @@ namespace sudb
             Go.Duration = TimeSpan.FromMilliseconds(TimeColorChange);
             bb.Background = new SolidColorBrush((bb.Background as SolidColorBrush).Color);
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
-            //bb.Background = Background;
-
+            Click_Down = false;
         }
 
         private void UserControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -101,6 +101,7 @@ namespace sudb
             Go.Duration = TimeSpan.FromMilliseconds(10);
             bb.Background = new SolidColorBrush((bb.Background as SolidColorBrush).Color);
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
+            Click_Down = true;
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -111,6 +112,10 @@ namespace sudb
             Go.Duration = TimeSpan.FromMilliseconds(10);
             bb.Background = new SolidColorBrush((bb.Background as SolidColorBrush).Color);
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
+            if(Click_Down == true)
+            {
+                //Click();
+            }
         }
     }
 }

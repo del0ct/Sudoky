@@ -13,32 +13,6 @@
         Title="Sudoku" Height="600" Width="600" WindowStyle="None"
         Loaded="Startup" Icon="/IMG20230716143054.jpg">
     <Window.Resources>
-        <!--ControlTemplate x:Key="test" TargetType="Button">
-            <Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup Name="CommonStates">
-                        <VisualState Name="Normal">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                    To="{TemplateBinding Background}"
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                    To="{DynamicResource back}" 
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
-                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-            </Grid>
-        </ControlTemplate-->
         <ControlTemplate x:Key="close" TargetType="Button">
             <Grid>
                 <VisualStateManager.VisualStateGroups>
@@ -103,24 +77,11 @@
             </LinearGradientBrush>
         </Grid.Background>
         <TextBlock Grid.RowSpan ="100" Grid.ColumnSpan="100" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="20,25,0,0" Foreground="#FFFFFF" Height="40"/>
-        <Button FontSize="14" Grid.RowSpan ="100" Grid.ColumnSpan="100"  Width="74" Margin="0,0,220,25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Solve" Background="#5020F0" Foreground="#CCCCCC" BorderThickness="0" Click="Press" Height="20">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button FontSize="14" Grid.ColumnSpan ="100" Grid.RowSpan="100" Width="74" Height="20" Margin="220,0,0,25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Clear" Background="#5020f0" Foreground="#cccccc" BorderThickness="0" Click="Clear_butn">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
         <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
         <Button x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource close}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="-0.4,-2.6,0,0" FontSize="20" Content="X" Click="Close_bybtn"/>
         <Button x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource minim}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="0,-11.16,0,0" FontSize="30" Content="-" Click="Minim_bybtn" Margin="0,0,45,0"/>
-        <uc:Buttn x:Name="Btn" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,220,35" MouseLeftButtonUp="Buttn_MouseLeftButtonUp"/>
+        <uc:Buttn FontSize="14" TextOn="Solve" ColorF="#5020f0" Foreground="#cccccc" x:Name="Btn" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="90,0,0,25" MouseLeftButtonUp="Buttn_MouseLeftButtonUp"/>
+        <uc:Buttn FontSize="14" TextOn="Clear" ColorF="#5020f0" Color_MouseOver="Blue" TimeColorChange="200" Foreground="#cccccc" x:Name="Btn2" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,90,25"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36"/>
             <ColumnDefinition Width="*"/>
