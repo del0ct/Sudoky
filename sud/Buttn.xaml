@@ -1,12 +1,15 @@
-﻿<UserControl x:Class="sud.UserControl1"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:sud"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+﻿<UserControl x:Class="sudb.Buttn"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         mc:Ignorable="d" 
+         d:DesignHeight="300" d:DesignWidth="300" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseLeftButtonDown="UserControl_MouseLeftButtonDown" MouseLeftButtonUp="UserControl_MouseLeftButtonUp">
+    <UserControl.Clip>
+        <RectangleGeometry Rect="{Binding Btn_size}" RadiusX="{Binding RoundStrength}" RadiusY="{Binding RoundStrength}"/>
+    </UserControl.Clip>
+    <Grid Button.Click="{Binding Click}">
+        <Canvas x:Name="bb" Background="{Binding ColorF}"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding TextOn}" Panel.ZIndex="1"/>
     </Grid>
 </UserControl>

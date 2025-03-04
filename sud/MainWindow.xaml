@@ -80,8 +80,8 @@
         <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
         <Button x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource close}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="-0.4,-2.6,0,0" FontSize="20" Content="X" Click="Close_bybtn"/>
         <Button x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource minim}" Background="#00000000" Foreground="LightGray" Grid.Column="9" Grid.ColumnSpan="2" Padding="0,-11.16,0,0" FontSize="30" Content="-" Click="Minim_bybtn" Margin="0,0,45,0"/>
-        <uc:Buttn FontSize="14" TextOn="Solve" ColorF="#5020f0" Foreground="#cccccc" x:Name="Btn" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="90,0,0,25" MouseLeftButtonUp="Buttn_MouseLeftButtonUp"/>
-        <uc:Buttn FontSize="14" TextOn="Clear" ColorF="#5020f0" Color_MouseOver="Blue" TimeColorChange="200" Foreground="#cccccc" x:Name="Btn2" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,90,25"/>
+        <uc:Buttn FontSize="14" TextOn="Solve" ColorF="#5020f0" Foreground="#cccccc" x:Name="Btn" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="90,0,0,25"/>
+        <uc:Buttn ButtonBase.Click="Clear_butn" FontSize="14" TextOn="Clear" ColorF="#5020f0" Foreground="#cccccc" x:Name="Btn2" Width="74" Height="20" RoundStrength="5" Grid.ColumnSpan="100" Grid.RowSpan="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,90,25"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36"/>
             <ColumnDefinition Width="*"/>

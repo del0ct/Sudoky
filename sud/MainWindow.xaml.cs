@@ -163,7 +163,7 @@ namespace sud
                 }
             }
         }
-        private void Clear_butn(object sender, EventArgs e)
+        private void Clear_butn(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < 81; i++)
             {
@@ -216,14 +216,7 @@ namespace sud
                 }
             }
         } 
-        private void Buttn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Close();
-        }
-        private void Buttn_MouseLeftButtonUp2(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
+
     }
 }
 
