@@ -16,13 +16,15 @@ namespace sudb
     /// </summary>
     public partial class Buttn : UserControl
     {
+        public static readonly RoutedEvent ClickEventt = EventManager.RegisterRoutedEvent("Clickk",
+            RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Buttn));
         public Buttn()
         {
             InitializeComponent();
             this.DataContext = this;
             SetValue(DefaultButtonTextAttribute, "Btn");
         }
-
+        
         public static readonly DependencyProperty BackgroundMouseOverProperty = DependencyProperty.Register("Background_MouseOver", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(190, 230, 253)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
         public static readonly DependencyProperty BackgroundDefaultProperty = DependencyProperty.Register("Default_Background", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(230, 230, 230)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
         public static readonly DependencyProperty DefaultButtonTextAttribute = DependencyProperty.Register("DefaultButtontText", typeof(string), typeof(TextBlock), new PropertyMetadata("Btn"));
@@ -30,10 +32,18 @@ namespace sudb
         public static readonly DependencyProperty RoundStrengthProperty = DependencyProperty.Register("RoundStrengt", typeof(double), typeof(RectangleGeometry), new PropertyMetadata((double)0));
         public static readonly DependencyProperty TimeToColorChangeProperty = DependencyProperty.Register("TimeColorChange", typeof(double), typeof(ColorAnimation), new PropertyMetadata((double)0));
 
-        public event RoutedEventHandler Click
-        {
-            add { }
-            remove { }
+        public event RoutedEventHandler Clickk
+        { 
+            add
+            {
+                // добавление обработчика
+                AddHandler(Buttn.ClickEventt, value);
+            }
+            remove
+            {
+                // удаление обработчика
+                RemoveHandler(Buttn.ClickEventt, value);
+            }
         }
 
         [Bindable(true)]
@@ -116,6 +126,11 @@ namespace sudb
             Go.Duration = TimeSpan.FromMilliseconds(10);
             bb.Background = new SolidColorBrush((bb.Background as SolidColorBrush).Color);
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
+            if ((this.IsMouseOver))
+            {
+                button1_Click(this,e);
+            }
         }
+        void button1_Click(object sender, RoutedEventArgs e) => RaiseEvent(new RoutedEventArgs(ClickEventt));
     }
 }

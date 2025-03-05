@@ -11,5 +11,6 @@
     <Grid>
         <Canvas x:Name="bb" Background="{Binding ColorF}"/>
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  Text="{Binding TextOn}" Panel.ZIndex="1"/>
+        
     </Grid>
 </UserControl>
