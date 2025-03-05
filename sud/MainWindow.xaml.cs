@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
+using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace sud
 {
@@ -13,6 +17,9 @@ namespace sud
     public partial class MainWindow : Window
     {
         private TextBox[] tb = new TextBox[82];
+
+        public int[] end = new int[82];
+        public int[] str = new int[82];
 
         public TextBox[] Tb { get => tb; set => tb = value; }
 
@@ -49,7 +56,74 @@ namespace sud
         {
             this.WindowState = WindowState.Minimized;
         }
-        private void Press(object sender, RoutedEventArgs e)
+        private void Solve()
+        {
+            //bool unreachible = false;
+            bool back = false;
+            for (int i = 0; i < 81; i++)
+            {
+                if (back) { i -= 2; }
+                if (i < 0) { /*unreachible = true;*/ break; }
+                if (str[i] != 0) { continue; }
+                else
+                {
+                    int start = 1;
+                    if (back)
+                    {
+                        start = end[i] + 1;
+                        if (start > 9)
+                        {
+                            end[i] = 0;
+                            continue;
+                        }
+                    }
+                    for (int j = start; j < 10; j++)
+                    {
+                        bool that = true;
+                        end[i] = j;
+                        for (int ck1 = 0; ck1 < 3; ck1++)
+                        {
+                            for (int ck2 = 0; ck2 < 3; ck2++)
+                            {
+                                if ((end[i] == end[(i / 9) * 9 + (ck1 * 3) + ck2]) && (i != (i / 9) * 9 + (ck1 * 3) + ck2))
+                                {
+                                    //MessageBox.Show("1 " + i.ToString() + " " + ((i / 9) * 9 + (ck1 * 3) + ck2).ToString() + " : " + end[i].ToString() +" "+ end[(i / 9) * 9 + (ck1 * 3) + ck2]);
+                                    that = false;
+                                    break;
+                                }
+                                else if ((end[i] == end[(i % 9) + ((ck1 * 3) + ck2) * 9]) && (i != (i % 9) + ((ck1 * 3) + ck2) * 9))
+                                {
+                                    //MessageBox.Show("2");
+                                    that = false;
+                                    break;
+                                }
+                                else if ((end[i] == end[(((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2)]) && ((((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2) != i))
+                                {
+                                    //MessageBox.Show("3");
+                                    that = false;
+                                    break;
+                                }
+                            }
+                            if (!that)
+                            {
+                                break;
+                            }
+                        }
+                        if (that)
+                        {
+                            back = false;
+                            break;
+                        }
+                        else if (j == 9)
+                        {
+                            back = true;
+                            end[i] = 0;
+                        }
+                    }
+                }
+            }
+        }
+        private async void Press(object sender, RoutedEventArgs e)
         {
             bool error = false;
             List<int> errcell = new List<int>();
@@ -72,10 +146,6 @@ namespace sud
             }
             else
             {
-                bool unreachible = false;
-                bool back = false;
-                int[] str = new int[82];
-                int[] end = new int[82];
                 for (int i = 0; i < 81; i++)
                 {
                     if ((FindName("tb" + i.ToString()) as TextBox).Text != "")
@@ -89,76 +159,20 @@ namespace sud
                         end[i] = 0;
                     }
                 }
+                await Task.Run(Solve);
                 for (int i = 0; i < 81; i++)
                 {
-                    if (back) { i -= 2; }
-                    if (str[i] != 0) { continue; }
-                    else
-                    {
-                        if (i < 0) { unreachible = true; break; }
-                        int start = 1;
-                        if (back)
-                        {
-                            start = end[i] + 1;
-                            if (start > 9)
-                            {
-                                end[i] = 0;
-                                continue;
-                            }
-                        }
-                        for (int j = start; j < 10; j++)
-                        {
-                            bool that = true;
-                            end[i] = j;
-                            for (int ck1 = 0; ck1 < 3; ck1++)
-                            {
-                                for (int ck2 = 0; ck2 < 3; ck2++)
-                                {
-                                    if ((end[i] == end[(i / 9) * 9 + (ck1 * 3) + ck2]) && (i != (i / 9) * 9 + (ck1 * 3) + ck2))
-                                    {
-                                        //MessageBox.Show("1 " + i.ToString() + " " + ((i / 9) * 9 + (ck1 * 3) + ck2).ToString() + " : " + end[i].ToString() +" "+ end[(i / 9) * 9 + (ck1 * 3) + ck2]);
-                                        that = false;
-                                        break;
-                                    }
-                                    else if ((end[i] == end[(i % 9) + ((ck1 * 3) + ck2) * 9]) && (i != (i % 9) + ((ck1 * 3) + ck2) * 9))
-                                    {
-                                        //MessageBox.Show("2");
-                                        that = false;
-                                        break;
-                                    }
-                                    else if ((end[i] == end[(((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2)]) && ((((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2) != i))
-                                    {
-                                        //MessageBox.Show("3");
-                                        that = false;
-                                        break;
-                                    }
-                                }
-                                if (!that)
-                                {
-                                    break;
-                                }
-                            }
-                            if (that)
-                            {
-                                back = false;
-                                break;
-                            }
-                            else if (j == 9)
-                            {
-                                back = true;
-                                end[i] = 0;
-                            }
-                        }
-                    }
-                }
-                if (unreachible) { MessageBox.Show("Нерешаемо", "Error"); }
-                else
-                {
-                    for (int i = 0; i < 81; i++)
+                    if (end[i] != 0)
                     {
                         (FindName("tb" + i.ToString()) as TextBox).Text = end[i].ToString();
                     }
-                    MessageBox.Show("done");
+                    else
+                    {
+                        MessageBox.Show("Unreashible","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                        break;
+                    }
+                    if (i == 80) 
+                        MessageBox.Show("Complite","Done",MessageBoxButton.OK);
                 }
             }
         }
