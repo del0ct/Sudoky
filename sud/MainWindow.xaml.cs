@@ -189,15 +189,15 @@ namespace sud
         }
         private void Drag(object sender, MouseEventArgs e)
         {
-            if ((e.LeftButton == MouseButtonState.Pressed) && (e.GetPosition(this).Y <= 25))
+            if ((e.LeftButton == MouseButtonState.Pressed) && (e.GetPosition(this).Y <= 25) && (e.GetPosition(this).X < 510))
                 this.DragMove();
         }
         private void Dark_modeSLD(object sender, RoutedEventArgs e)
         {
             if (Layoot.IsLoaded)
             {
-                minbt.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)))); //# FFD3D3D3
-                clsbt.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value))));
+                Btnminim.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value))));
+                Btnclose.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value))));
                 gsup.Color = Color.FromArgb(255, Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)));
                 gsdw.Color = Color.FromArgb(255, Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)));
                 title.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(255 * slider.Value), Convert.ToByte(255 * slider.Value), Convert.ToByte(255 * slider.Value)));
