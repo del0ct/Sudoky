@@ -19,8 +19,6 @@ namespace sud
         public MainWindow()
         {
             InitializeComponent();
-            Btn.Btn_size = new Rect(0, 0, Btn.Width, Btn.Height);
-            Btn2.Btn_size = new Rect(0, 0, Btn2.Width, Btn2.Height);
         }
 
         private void Startup(object sender, RoutedEventArgs e)
@@ -219,42 +217,3 @@ namespace sud
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

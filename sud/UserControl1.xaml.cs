@@ -12,37 +12,36 @@ using System.Windows.Media.Animation;
 namespace sudb
 {
     /// <summary>
-    /// Логика взаимодействия для UserControl1.xaml
+    /// Логика взаимодействия для Buttn
     /// </summary>
     public partial class Buttn : UserControl
     {
-        public static readonly RoutedEvent ClickEventt = EventManager.RegisterRoutedEvent("Clickk",
+        public static readonly RoutedEvent Press_ButtonEvent = EventManager.RegisterRoutedEvent("Press_Button",
             RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Buttn));
         public Buttn()
         {
             InitializeComponent();
             this.DataContext = this;
-            SetValue(DefaultButtonTextAttribute, "Btn");
         }
         
         public static readonly DependencyProperty BackgroundMouseOverProperty = DependencyProperty.Register("Background_MouseOver", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(190, 230, 253)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
         public static readonly DependencyProperty BackgroundDefaultProperty = DependencyProperty.Register("Default_Background", typeof(Brush), typeof(Panel), new FrameworkPropertyMetadata(new SolidColorBrush(Color.FromRgb(230, 230, 230)), FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
         public static readonly DependencyProperty DefaultButtonTextAttribute = DependencyProperty.Register("DefaultButtontText", typeof(string), typeof(TextBlock), new PropertyMetadata("Btn"));
-        public static readonly DependencyProperty ButtonSizeAttribute = DependencyProperty.Register("Btn_Size", typeof(Rect), typeof(RectangleGeometry), new PropertyMetadata(new Rect(0, 0, 300, 300)));
+        //public static readonly DependencyProperty ButtonSizeAttribute = DependencyProperty.Register("Btn_Size", typeof(Rect), typeof(RectangleGeometry), new PropertyMetadata(new Rect(0, 0, 300, 300)));
         public static readonly DependencyProperty RoundStrengthProperty = DependencyProperty.Register("RoundStrengt", typeof(double), typeof(RectangleGeometry), new PropertyMetadata((double)0));
         public static readonly DependencyProperty TimeToColorChangeProperty = DependencyProperty.Register("TimeColorChange", typeof(double), typeof(ColorAnimation), new PropertyMetadata((double)0));
 
-        public event RoutedEventHandler Clickk
+        public event RoutedEventHandler Press_Button
         { 
             add
             {
                 // добавление обработчика
-                AddHandler(Buttn.ClickEventt, value);
+                AddHandler(Buttn.Press_ButtonEvent, value);
             }
             remove
             {
                 // удаление обработчика
-                RemoveHandler(Buttn.ClickEventt, value);
+                RemoveHandler(Buttn.Press_ButtonEvent, value);
             }
         }
 
@@ -53,13 +52,13 @@ namespace sudb
             get { return (double)GetValue(RoundStrengthProperty); }
             set { SetValue(RoundStrengthProperty, value); }
         }
-        [Bindable(true)]
+        /*[Bindable(true)]
         [Category("Btn")]
         public Rect Btn_size
         {
             get { return (Rect)GetValue(ButtonSizeAttribute); }
-            set { SetValue(ButtonSizeAttribute, value); }
-        }
+            set { SetValue(ButtonSizeAttribute, new Rect(0,0,Width,Height)); }
+        }*/
         [Bindable(true)]
         [Category("text")]
         public String TextOn
@@ -87,6 +86,16 @@ namespace sudb
         {
             get { return (double)GetValue(TimeToColorChangeProperty); }
             set { SetValue(TimeToColorChangeProperty, value); }
+        }
+        public new double Height
+        {
+            get { return (double)GetValue(HeightProperty); }
+            set { SetValue(HeightProperty, value); }
+        }
+        public new double Width
+        {
+            get { return (double)GetValue(WidthProperty); }
+            set { SetValue(WidthProperty, value); }
         }
         private void UserControl_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -128,9 +137,12 @@ namespace sudb
             bb.Background.BeginAnimation(SolidColorBrush.ColorProperty, Go);
             if ((this.IsMouseOver))
             {
-                button1_Click(this,e);
+                RaiseEvent(new RoutedEventArgs(Press_ButtonEvent));
             }
         }
-        void button1_Click(object sender, RoutedEventArgs e) => RaiseEvent(new RoutedEventArgs(ClickEventt));
+        private void Loaded_seter_RectSize(object sender, RoutedEventArgs e)
+        {
+            Rect.Rect = new Rect(0, 0, Width, Height);
+        }
     }
 }
