@@ -9,35 +9,9 @@
         x:Name="win"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Title="Sudoku" Height="600" Width="600" WindowStyle="None"
-        Loaded="Startup" Icon="/IMG20230716143054.jpg">
+        Title="Sudoku" Height="600" Width="600" WindowStyle="None" Icon="/Properties/Icon.ico"
+        Loaded="Startup">
     <Window.Resources>
-        <!--ControlTemplate x:Key="test" TargetType="Button">
-            <Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup Name="CommonStates">
-                        <VisualState Name="Normal">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                    To="{TemplateBinding Background}"
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                    To="{DynamicResource back}" 
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
-                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-            </Grid>
-        </ControlTemplate-->
         <ControlTemplate x:Key="close" TargetType="Button">
             <Grid>
                 <VisualStateManager.VisualStateGroups>
@@ -119,6 +93,7 @@
         <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
         <Button x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource close}" Background="#00000000" Foreground="LightGray" Grid.ColumnSpan="100" Padding="-0.4,-2.6,0,0" FontSize="20" Content="X" Click="Close_bybtn"/>
         <Button x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource minim}" Background="#00000000" Foreground="LightGray" Grid.ColumnSpan="100" Padding="0,-11.16,0,0" FontSize="30" Content="-" Click="Minim_bybtn" Margin="0,0,45,0"/>
+        <Image Source="/Properties/icon.ico" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="7,4,0,0"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36"/>
             <ColumnDefinition Width="*"/>

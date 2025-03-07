@@ -8,6 +8,7 @@ using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace sud
 {
@@ -25,6 +26,7 @@ namespace sud
 
         public MainWindow()
         {
+            
             InitializeComponent();
         }
 
@@ -127,6 +129,7 @@ namespace sud
         {
             bool error = false;
             List<int> errcell = new List<int>();
+            List<int> march8 = new List<int> { 1 };//3,7,11,13,15,17,19,23,27,28,36,38,44,47,53,57,61,67,69,77}; 
             errcell.Clear();
             for (int i = 0; i < 81; i++)
             {
@@ -138,10 +141,22 @@ namespace sud
             }
             if (error)
             {
-                var result = (MessageBox.Show("Ошибка в следующих ячейках " + string.Join(" ", errcell) + "\nПерейдти в неверную ячейку?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error));
-                if (result == MessageBoxResult.Yes)
+                ///
+                /// Включение на 8-е февраля
+                /// 
+                if (errcell.SequenceEqual(march8))
                 {
-                    (FindName("tb" + (errcell[0] - 1).ToString()) as TextBox).Focus();
+                    Window2 window2 = new Window2();   
+                    window2.Topmost = true;
+                    window2.Show();
+                }
+                else
+                {
+                    var result = (MessageBox.Show("Ошибка в следующих ячейках " + string.Join(" ", errcell) + "\nПерейдти в неверную ячейку?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error));
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        (FindName("tb" + (errcell[0] - 1).ToString()) as TextBox).Focus();
+                    }
                 }
             }
             else
@@ -168,11 +183,11 @@ namespace sud
                     }
                     else
                     {
-                        MessageBox.Show("Unreashible","Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                        MessageBox.Show("Unreashible", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                     }
-                    if (i == 80) 
-                        MessageBox.Show("Complite","Done",MessageBoxButton.OK);
+                    if (i == 80)
+                        MessageBox.Show("Complite", "Done", MessageBoxButton.OK);
                 }
             }
         }
