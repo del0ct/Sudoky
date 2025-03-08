@@ -11,7 +11,7 @@
         ResizeMode="NoResize"
         AllowsTransparency="True"
         Title="Sudoku" Height="600" Width="600" WindowStyle="None"
-        Loaded="Startup" Icon="/IMG20230716143054.jpg">
+        Loaded="Startup">
     <Window.Resources>
         <ControlTemplate x:Key="close" TargetType="Button">
             <Grid>
