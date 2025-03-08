@@ -12,60 +12,6 @@
         AllowsTransparency="True"
         Title="Sudoku" Height="600" Width="600" WindowStyle="None"
         Loaded="Startup">
-    <Window.Resources>
-        <ControlTemplate x:Key="close" TargetType="Button">
-            <Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup Name="CommonStates">
-                        <VisualState Name="Normal">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                            To="#00000000"
-                            Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                            To="Red" 
-                            Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
-                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-            </Grid>
-        </ControlTemplate>
-        <ControlTemplate x:Key="minim" TargetType="Button">
-            <Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup Name="CommonStates">
-                        <VisualState Name="Normal">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)"
-                    To="{TemplateBinding Background}"
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="backgroundElement" 
-                    Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)" 
-                    To="#aa555555" 
-                    Duration="0:0:0.04"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-                <Canvas Name="backgroundElement" Background="{TemplateBinding Background}"/>
-                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
-            </Grid>
-        </ControlTemplate>
-    </Window.Resources>
     <Window.Clip>
         <RectangleGeometry Rect="0,0,600,600" RadiusX="15" RadiusY="15"/>
     </Window.Clip>
