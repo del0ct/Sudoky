@@ -75,7 +75,7 @@
                 <GradientStop x:Name="gsdw" Color="#222222" Offset="0.85"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock Grid.RowSpan ="100" Grid.ColumnSpan="100" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="20,25,0,0" Foreground="#FFFFFF" Height="40"/>
+        <TextBlock Grid.RowSpan ="100" Grid.ColumnSpan="100" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="60,25,0,0" Foreground="#FFFFFF" Height="40"/>
         <Button FontSize="14" Grid.RowSpan ="100" Grid.ColumnSpan="100"  Width="74" Margin="0,0,220,25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Solve" Background="#5020F0" Foreground="#CCCCCC" BorderThickness="0" Click="Press" Height="20">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -93,7 +93,7 @@
         <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
         <Button x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource close}" Background="#00000000" Foreground="LightGray" Grid.ColumnSpan="100" Padding="-0.4,-2.6,0,0" FontSize="20" Content="X" Click="Close_bybtn"/>
         <Button x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Template="{StaticResource minim}" Background="#00000000" Foreground="LightGray" Grid.ColumnSpan="100" Padding="0,-11.16,0,0" FontSize="30" Content="-" Click="Minim_bybtn" Margin="0,0,45,0"/>
-        <Image Source="/Properties/icon.ico" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="7,4,0,0"/>
+        <Image Source="/Properties/icon.ico" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Margin="7,28,0,0"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36"/>
             <ColumnDefinition Width="*"/>
