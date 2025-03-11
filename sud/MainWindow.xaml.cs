@@ -60,12 +60,11 @@ namespace sud
         }
         private void Solve()
         {
-            //bool unreachible = false;
             bool back = false;
             for (int i = 0; i < 81; i++)
             {
                 if (back) { i -= 2; }
-                if (i < 0) { /*unreachible = true;*/ break; }
+                if (i < 0) { break; }
                 if (str[i] != 0) { continue; }
                 else
                 {
@@ -89,19 +88,16 @@ namespace sud
                             {
                                 if ((end[i] == end[(i / 9) * 9 + (ck1 * 3) + ck2]) && (i != (i / 9) * 9 + (ck1 * 3) + ck2))
                                 {
-                                    //MessageBox.Show("1 " + i.ToString() + " " + ((i / 9) * 9 + (ck1 * 3) + ck2).ToString() + " : " + end[i].ToString() +" "+ end[(i / 9) * 9 + (ck1 * 3) + ck2]);
                                     that = false;
                                     break;
                                 }
                                 else if ((end[i] == end[(i % 9) + ((ck1 * 3) + ck2) * 9]) && (i != (i % 9) + ((ck1 * 3) + ck2) * 9))
                                 {
-                                    //MessageBox.Show("2");
                                     that = false;
                                     break;
                                 }
                                 else if ((end[i] == end[(((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2)]) && ((((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2) != i))
                                 {
-                                    //MessageBox.Show("3");
                                     that = false;
                                     break;
                                 }
@@ -129,7 +125,7 @@ namespace sud
         {
             bool error = false;
             List<int> errcell = new List<int>();
-            List<int> march8 = new List<int> { 1 };//3,7,11,13,15,17,19,23,27,28,36,38,44,47,53,57,61,67,69,77}; 
+            List<int> march8 = new List<int> { 3,7,11,13,15,17,19,23,27,28,36,38,44,47,53,57,61,67,69,77}; 
             errcell.Clear();
             for (int i = 0; i < 81; i++)
             {
@@ -219,14 +215,14 @@ namespace sud
         }
         private void Drag(object sender, MouseEventArgs e)
         {
-            if ((e.LeftButton == MouseButtonState.Pressed) && (e.GetPosition(this).Y <= 25))
+            if ((e.LeftButton == MouseButtonState.Pressed) && (e.GetPosition(this).Y <= 25) && (e.GetPosition(this).X < 510))
                 this.DragMove();
         }
         private void Dark_modeSLD(object sender, RoutedEventArgs e)
         {
             if (Layoot.IsLoaded)
             {
-                minbt.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)))); //# FFD3D3D3
+                minbt.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value))));
                 clsbt.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value)), Convert.ToByte(0 + (211 * slider.Value))));
                 gsup.Color = Color.FromArgb(255, Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)));
                 gsdw.Color = Color.FromArgb(255, Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)));
