@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Window1" ResizeMode="NoResize" WindowStyle="None" Height="450" Width="339">
     <Grid>
-        <Image Source="/Properties/8march.jpg"/>
+        <Image Source="/Resorces/8march.jpg"/>
         <Button Opacity="0" Width="339" Height="450" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -26,7 +26,7 @@ namespace sud
 
         public MainWindow()
         {
-            
+
             InitializeComponent();
         }
 
@@ -46,9 +46,10 @@ namespace sud
                 Tb[i].MaxLines = 1;
                 Tb[i].TextAlignment = TextAlignment.Center;
                 Tb[i].Padding = new Thickness(0, -13, 0, 0);
+                Tb[i].PreviewTextInput += new TextCompositionEventHandler(Selectchanj);
                 Tb[i].TextChanged += new TextChangedEventHandler(Err);
+                Tb[i].PreviewKeyDown += new KeyEventHandler(TestBTN);
             }
-
         }
         private void Close_bybtn(object sender, RoutedEventArgs e)
         {
@@ -125,7 +126,7 @@ namespace sud
         {
             bool error = false;
             List<int> errcell = new List<int>();
-            List<int> march8 = new List<int> { 3,7,11,13,15,17,19,23,27,28,36,38,44,47,53,57,61,67,69,77}; 
+            List<int> march8 = new List<int> { 3, 7, 11, 13, 15, 17, 19, 23, 27, 28, 36, 38, 44, 47, 53, 57, 61, 67, 69, 77 };
             errcell.Clear();
             for (int i = 0; i < 81; i++)
             {
@@ -142,7 +143,7 @@ namespace sud
                 /// 
                 if (errcell.SequenceEqual(march8))
                 {
-                    Window2 window2 = new Window2();   
+                    Window2 window2 = new Window2();
                     window2.Topmost = true;
                     window2.Show();
                 }
@@ -179,7 +180,7 @@ namespace sud
                     }
                     else
                     {
-                        MessageBox.Show("Unreashible", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Unreachible", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                     }
                     if (i == 80)
@@ -187,7 +188,7 @@ namespace sud
                 }
             }
         }
-        private void Clear_butn(object sender, EventArgs e)
+        private void Clear_butn(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < 81; i++)
             {
@@ -211,6 +212,78 @@ namespace sud
             else
             {
                 (sender as TextBox).Background = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(255 - (26 * slider.Value)), Convert.ToByte(255 - (26 * slider.Value)), Convert.ToByte(255 - (26 * slider.Value))));
+            }
+            if (e.Changes.First().AddedLength == 1)
+            {
+                if (Convert.ToInt32((sender as TextBox).Name.Substring(2)) + 1 <= 80)
+                {
+                    (FindName("tb" + (Convert.ToInt32((sender as TextBox).Name.Substring(2)) + 1).ToString()) as TextBox).Focus();
+                }
+                else
+                {
+                    (FindName("tb" + 0.ToString()) as TextBox).Focus();
+                }
+            }
+        }
+        private void TestBTN(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Back) && (Keyboard.FocusedElement.GetType() == typeof(TextBox)))
+            {
+                TextBox nowfocus = Keyboard.FocusedElement as TextBox;
+                if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 >= 0)
+                {
+                    (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1).ToString()) as TextBox).Focus();
+                }
+                else
+                {
+                    (FindName("tb" + 80.ToString()) as TextBox).Focus();
+                }
+            }
+            if (((e.Key == Key.Up) || (e.Key == Key.Left) || (e.Key == Key.Right) || (e.Key == Key.Down)) && (Keyboard.FocusedElement.GetType() == typeof(TextBox)))
+            {
+                TextBox nowfocus = Keyboard.FocusedElement as TextBox;
+
+                if (Keyboard.FocusedElement.GetType() == typeof(TextBox))
+                {
+                    (Keyboard.FocusedElement as TextBox).SelectionStart = 0;
+                    (Keyboard.FocusedElement as TextBox).SelectionLength = 2;
+                }
+                switch (e.Key.ToString())
+                {
+                    case "Up":
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 9 >= 0)
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 9).ToString()) as TextBox).Focus();
+                        }
+                        else
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) + 72).ToString()) as TextBox).Focus();
+                        }
+                        break;
+                    case "Down":
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 9 <= 80)
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) + 9).ToString()) as TextBox).Focus();
+                        }
+                        else
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 72).ToString()) as TextBox).Focus();
+                        }
+                        break;
+                    case "Left":
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 >= 0)
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1).ToString()) as TextBox).Focus();
+                        }
+                        break;
+                    case "Right":
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 1 <= 80)
+                        {
+                            (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) + 1).ToString()) as TextBox).Focus();
+
+                        }
+                        break;
+                }
             }
         }
         private void Drag(object sender, MouseEventArgs e)
@@ -240,5 +313,9 @@ namespace sud
                 }
             }
         } 
+        private void Selectchanj(object sender, TextCompositionEventArgs e)
+        {
+            (e.Source as TextBox).Text = null;
+        }
     }
 }

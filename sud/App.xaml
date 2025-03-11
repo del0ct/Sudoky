@@ -4,5 +4,9 @@
              xmlns:local="clr-namespace:sud"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <FontFamily x:Key="cantarell">pack://aplication:,,,/Propeties/Cantarell/#Cantarell Regular</FontFamily>
+        <FontFamily x:Key="cantarellBold">pack://aplication:,,,/Propeties/Cantarell/#Cantarell Bold</FontFamily>
+        <FontFamily x:Key="cantarellBoldOblique">pack://aplication:,,,/Propeties/Cantarell/#Cantarell BoldOblique</FontFamily>
+        <FontFamily x:Key="cantarellOblique">pack://aplication:,,,/Propeties/Cantarell/#Cantarell Oblique</FontFamily>
     </Application.Resources>
 </Application>

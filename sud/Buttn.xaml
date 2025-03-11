@@ -10,6 +10,7 @@
     </UserControl.Clip>
     <Grid>
         <Canvas x:Name="bb" Background="{Binding ColorF}"/>
+        <Rectangle Fill="#aa000000" Grid.ColumnSpan="100" Grid.RowSpan="100" Height="{Binding Heigth}" Width="75" HorizontalAlignment="Right" VerticalAlignment="Bottom" RadiusX="7" RadiusY="7"/>
         <TextBlock x:Name="Textb" VerticalAlignment="Center" HorizontalAlignment="Center" Loaded="Loaded_seter_RectSize"  Text="{Binding TextOn}" Panel.ZIndex="1" RenderTransformOrigin="0.5,0.5">
             <TextBlock.RenderTransform>
                 <TransformGroup>

@@ -10,7 +10,7 @@
         x:Name="win"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Title="Sudoku" Height="600" Width="600" WindowStyle="None" Icon="/Properties/Icon.ico"
+        Title="Sudoku" Height="600" Width="600" WindowStyle="None" Icon="/Resorces/icon.ico"
         Loaded="Startup">
     <Window.Clip>
         <RectangleGeometry Rect="0,0,600,600" RadiusX="15" RadiusY="15"/>
@@ -22,13 +22,14 @@
                 <GradientStop x:Name="gsdw" Color="#222222" Offset="0.85"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock Grid.RowSpan ="100" Grid.ColumnSpan="100" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="60,25,0,0" Foreground="#FFFFFF" Height="40"/>
-        <Slider Grid.RowSpan ="100" Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,9,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
-        <uc:Buttn RoundStrength="5" FontSize="14" Grid.ColumnSpan ="100" Grid.RowSpan="100" Width="74" Height="20" Margin="220,0,0,25" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextOn="Clear" ColorF="#5020f0" Foreground="#cccccc" Press_Button="Clear_butn"/>
-        <uc:Buttn RoundStrength="5" FontSize="14" Grid.RowSpan ="100" Grid.ColumnSpan="100"  Width="74" Margin="0,0,220,25" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextOn="Solve" ColorF="#5020F0" Foreground="#CCCCCC" Press_Button="Press" Height="20"/>
-        <uc:Buttn x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" ColorF="#00000000" Color_MouseOver="#aa555555" Foreground="LightGray" Grid.ColumnSpan="100" PaddingY="-4.16" FontSize="30" Margin="0,0,45,0" TextOn="-" Press_Button="Minim_bybtn"/>
+        <TextBlock Grid.ColumnSpan="19" Name="title" Text="Sudoku" FontSize="30" VerticalAlignment="Top" Margin="60,37,0,0" Foreground="#FFFFFF" FontFamily="{StaticResource cantarell}" Height="40"/>
+        <Slider Grid.ColumnSpan="100" x:Name="slider" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,35,20,0" Width="50" Maximum="1" ValueChanged="Dark_modeSLD" Value="1" Height="18"/>
+        <uc:Buttn FontFamily="{StaticResource cantarell}" Panel.ZIndex="2" RoundStrength="7" FontSize="20" Grid.ColumnSpan="100" Grid.RowSpan="100" Width="74" Height="30" Margin="220,0,0,25" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextOn="Clear" ColorF="#5020f0" Foreground="#cccccc" Press_Button="Clear_butn"/>
+        <uc:Buttn Panel.ZIndex="2" RoundStrength="7" FontSize="20" Grid.ColumnSpan="100" Grid.RowSpan="100" Width="74" Height="30" Margin="0,0,220,25" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextOn="Solve" ColorF="#5020F0" Foreground="#CCCCCC" FontFamily="{StaticResource cantarell}" Press_Button="Press"/>
+        <uc:Buttn x:Name="minbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" ColorF="#00000000" Color_MouseOver="#aa555555" Foreground="LightGray" PaddingY="-3" Grid.ColumnSpan="100" FontSize="30" Margin="0,0,45,0" TextOn="-" Press_Button="Minim_bybtn"/>
         <uc:Buttn x:Name="clsbt" Width="45" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" ColorF="#00000000" Color_MouseOver="Red" Foreground="LightGray" Grid.ColumnSpan="100" PaddingY="-1.16" FontSize="20" TextOn="X" Press_Button="Close_bybtn"/>
-        <Image Source="/Properties/icon.ico" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Margin="7,28,0,0"/>
+        <Canvas Name="Background_on_cells" Background="DarkViolet" Grid.ColumnSpan="100" Grid.RowSpan="100" Height="454.5" Width="528" Margin="0,15,0,0"/>
+        <Image Source="/Resorces/icon.ico" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Margin="10,35,0,0"/>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="36"/>
             <ColumnDefinition Width="*"/>

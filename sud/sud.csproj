@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Properties\icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resorces\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -74,7 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Buttn.xaml.cs" />
+    <Compile Include="Buttn.xaml.cs">
+      <DependentUpon>Buttn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -83,8 +85,8 @@
       <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Page Include="Buttn.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +127,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Properties\Сantarell\Cantarell-Bold.ttf" />
+    <Resource Include="Properties\Сantarell\Cantarell-BoldOblique.ttf" />
+    <Resource Include="Properties\Сantarell\Cantarell-Oblique.ttf" />
+    <Resource Include="Properties\Сantarell\Cantarell-Regular.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -146,13 +152,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Properties\8march.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Heart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\icon.ico" />
+    <Resource Include="Resorces\8march.jpg" />
+    <Resource Include="Resorces\Heart.png" />
+    <Resource Include="Resorces\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
