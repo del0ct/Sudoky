@@ -62,14 +62,6 @@ namespace sud
         private void Solve()
         {
             bool back = false;
-            /*for (int cell = 0; cell < 81; cell++)
-            {
-                if (back) { cell -= 2; }
-                if (cell < 0) { break; } //add bool of leave before end
-                if (str[cell] != 0) { cell++; }
-                if (back)
-                { end[cell]++; }
-            }*/
             for (int i = 1; i <= 81; i++)  // testing each cell
             {
                 if (back) { i -= 2; } 
@@ -125,7 +117,6 @@ namespace sud
         {
             bool error = false;
             List<int> errcell = new List<int>();
-            List<int> march8 = new List<int> { 3, 7, 11, 13, 15, 17, 19, 23, 27, 28, 36, 38, 44, 47, 53, 57, 61, 67, 69, 77 };
             errcell.Clear();
             for (int i = 1; i <= 81; i++)
             {
@@ -137,23 +128,11 @@ namespace sud
             } // check for symbol errors
             if (error)
             {
-                ///
-                /// Включение на 8-е февраля
-                /// 
-                if (errcell.SequenceEqual(march8))
-                {
-                    Window2 window2 = new Window2();
-                    window2.Topmost = true;
-                    window2.Show();
-                }
-                else
-                {
                     var result = (MessageBox.Show("Ошибка в следующих ячейках " + string.Join(" ", errcell) + "\nПерейдти в неверную ячейку?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error));
                     if (result == MessageBoxResult.Yes)
                     {
                         (FindName("tb" + (errcell[0]).ToString()) as TextBox).Focus();
                     }
-                }
             } // error attention
             else
             {
@@ -206,7 +185,6 @@ namespace sud
             }
             if (err)
             {
-                //MessageBox.Show((((i - 1) / 9) * 9 + 1 + check));
                 (sender as TextBox).Background = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(255 - (26 * slider.Value)), 0, 0));
             }
             else
