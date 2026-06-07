@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sud"
         mc:Ignorable="d"
-        Title="С 8-М МАРТА" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Height="200" Icon="/Properties/Heart.png" Width="300">
+        Title="С 8-М МАРТА" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Height="200" Icon="/Resorces/Heart.png" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.7*"/>

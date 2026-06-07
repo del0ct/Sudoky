@@ -9,6 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Windows.Media.Animation;
 
 namespace sud
 {
@@ -26,18 +27,17 @@ namespace sud
 
         public MainWindow()
         {
-
             InitializeComponent();
         }
 
         private void Startup(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 81; i++)
+            for (int i = 1; i <= 81; i++)
             {
                 Tb[i] = new TextBox();
                 Layoot.Children.Add(Tb[i]);
-                Grid.SetColumn(Tb[i], (i % 9) + 1 + (i % 9));
-                Grid.SetRow(Tb[i], (i / 9) + 1 + (i / 9));
+                Grid.SetColumn(Tb[i], ((i - 1) % 9) + 2 + ((i - 1) % 9));
+                Grid.SetRow(Tb[i], ((i - 1) / 9) + 2 + ((i - 1) / 9));
                 Tb[i].FontSize = 50;
                 Tb[i].Name = "tb" + i.ToString();
                 RegisterName("tb" + i.ToString(), Tb[i]);
@@ -62,10 +62,18 @@ namespace sud
         private void Solve()
         {
             bool back = false;
-            for (int i = 0; i < 81; i++)
+            /*for (int cell = 0; cell < 81; cell++)
             {
-                if (back) { i -= 2; }
-                if (i < 0) { break; }
+                if (back) { cell -= 2; }
+                if (cell < 0) { break; } //add bool of leave before end
+                if (str[cell] != 0) { cell++; }
+                if (back)
+                { end[cell]++; }
+            }*/
+            for (int i = 1; i <= 81; i++)  // testing each cell
+            {
+                if (back) { i -= 2; } 
+                if (i < 1) { break; }
                 if (str[i] != 0) { continue; }
                 else
                 {
@@ -73,38 +81,29 @@ namespace sud
                     if (back)
                     {
                         start = end[i] + 1;
-                        if (start > 9)
                         {
                             end[i] = 0;
-                            continue;
                         }
                     }
                     for (int j = start; j < 10; j++)
                     {
                         bool that = true;
                         end[i] = j;
-                        for (int ck1 = 0; ck1 < 3; ck1++)
+                        for (int check = 0; check < 9; check++)
                         {
-                            for (int ck2 = 0; ck2 < 3; ck2++)
+                            if ((end[i] == end[((i - 1) / 9)*9 + 1 + check]) && (i != (((i - 1) / 9)*9 + 1 + check)))
                             {
-                                if ((end[i] == end[(i / 9) * 9 + (ck1 * 3) + ck2]) && (i != (i / 9) * 9 + (ck1 * 3) + ck2))
-                                {
-                                    that = false;
-                                    break;
-                                }
-                                else if ((end[i] == end[(i % 9) + ((ck1 * 3) + ck2) * 9]) && (i != (i % 9) + ((ck1 * 3) + ck2) * 9))
-                                {
-                                    that = false;
-                                    break;
-                                }
-                                else if ((end[i] == end[(((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2)]) && ((((i / 3) * 3) - ((i / 9) * 9) + (((i / 9) / 3) * 3) * 9) + ((ck1 * 9) + ck2) != i))
-                                {
-                                    that = false;
-                                    break;
-                                }
+                                that = false;
+                                break;
                             }
-                            if (!that)
+                            if ((end[i] == end[((i - 1) % 9) + 1 + check*9]) && (i != (((i - 1) % 9) + 1 + check*9)))
                             {
+                                that = false;
+                                break;
+                            }
+                            if ((end[i] == end[((((i - 1) / 9) - ((i - 1) / 9) % 3) * 9) + ((((i - 1) % 9) + 1) - ((i - 1) % 9) % 3) + check%3 + check/3*9]) && (i != check%3 + check/3*9 + ((((i - 1) / 9) - ((i - 1) / 9) % 3) * 9) + ((((i - 1) % 9) + 1) - ((i - 1) % 9) % 3)))
+                            {
+                                that = false;
                                 break;
                             }
                         }
@@ -122,20 +121,20 @@ namespace sud
                 }
             }
         }
-        private async void Press(object sender, RoutedEventArgs e)
+        private async void Press(object sender, RoutedEventArgs e) // start of solving async
         {
             bool error = false;
             List<int> errcell = new List<int>();
             List<int> march8 = new List<int> { 3, 7, 11, 13, 15, 17, 19, 23, 27, 28, 36, 38, 44, 47, 53, 57, 61, 67, 69, 77 };
             errcell.Clear();
-            for (int i = 0; i < 81; i++)
+            for (int i = 1; i <= 81; i++)
             {
                 if (((FindName("tb" + i.ToString()) as TextBox).Background as SolidColorBrush).Color.G == 0)
                 {
                     error = true;
-                    errcell.Add(i + 1);
+                    errcell.Add(i);
                 }
-            }
+            } // check for symbol errors
             if (error)
             {
                 ///
@@ -152,13 +151,13 @@ namespace sud
                     var result = (MessageBox.Show("Ошибка в следующих ячейках " + string.Join(" ", errcell) + "\nПерейдти в неверную ячейку?", "Ошибка", MessageBoxButton.YesNo, MessageBoxImage.Error));
                     if (result == MessageBoxResult.Yes)
                     {
-                        (FindName("tb" + (errcell[0] - 1).ToString()) as TextBox).Focus();
+                        (FindName("tb" + (errcell[0]).ToString()) as TextBox).Focus();
                     }
                 }
-            }
+            } // error attention
             else
             {
-                for (int i = 0; i < 81; i++)
+                for (int i = 1; i <= 81; i++)
                 {
                     if ((FindName("tb" + i.ToString()) as TextBox).Text != "")
                     {
@@ -170,9 +169,9 @@ namespace sud
                         str[i] = 0;
                         end[i] = 0;
                     }
-                }
-                await Task.Run(Solve);
-                for (int i = 0; i < 81; i++)
+                } // transport data from wfp to matrix
+                await Task.Run(Solve); // start solving task await
+                for (int i = 1; i <= 81; i++)
                 {
                     if (end[i] != 0)
                     {
@@ -180,17 +179,17 @@ namespace sud
                     }
                     else
                     {
-                        MessageBox.Show("Unreachible", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Unreachable", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                     }
-                    if (i == 80)
-                        MessageBox.Show("Complite", "Done", MessageBoxButton.OK);
-                }
-            }
+                    if (i == 81)
+                        MessageBox.Show("Complete", "Done", MessageBoxButton.OK);
+                } // output result
+            } // going to next step
         }
         private void Clear_butn(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 81; i++)
+            for (int i = 1; i <= 81; i++)
             {
                 (FindName("tb" + i.ToString()) as TextBox).Text = "";
             }
@@ -207,6 +206,7 @@ namespace sud
             }
             if (err)
             {
+                //MessageBox.Show((((i - 1) / 9) * 9 + 1 + check));
                 (sender as TextBox).Background = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(255 - (26 * slider.Value)), 0, 0));
             }
             else
@@ -215,13 +215,13 @@ namespace sud
             }
             if (e.Changes.First().AddedLength == 1)
             {
-                if (Convert.ToInt32((sender as TextBox).Name.Substring(2)) + 1 <= 80)
+                if (Convert.ToInt32((sender as TextBox).Name.Substring(2)) + 1 <= 81)
                 {
                     (FindName("tb" + (Convert.ToInt32((sender as TextBox).Name.Substring(2)) + 1).ToString()) as TextBox).Focus();
                 }
                 else
                 {
-                    (FindName("tb" + 0.ToString()) as TextBox).Focus();
+                    (FindName("tb" + 1.ToString()) as TextBox).Focus();
                 }
             }
         }
@@ -230,13 +230,14 @@ namespace sud
             if ((e.Key == Key.Back) && (Keyboard.FocusedElement.GetType() == typeof(TextBox)))
             {
                 TextBox nowfocus = Keyboard.FocusedElement as TextBox;
-                if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 >= 0)
+                nowfocus.Text = "";
+                if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 > 0)
                 {
                     (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1).ToString()) as TextBox).Focus();
                 }
                 else
                 {
-                    (FindName("tb" + 80.ToString()) as TextBox).Focus();
+                    (FindName("tb" + 81.ToString()) as TextBox).Focus();
                 }
             }
             if (((e.Key == Key.Up) || (e.Key == Key.Left) || (e.Key == Key.Right) || (e.Key == Key.Down)) && (Keyboard.FocusedElement.GetType() == typeof(TextBox)))
@@ -251,7 +252,7 @@ namespace sud
                 switch (e.Key.ToString())
                 {
                     case "Up":
-                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 9 >= 0)
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 9 > 0)
                         {
                             (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 9).ToString()) as TextBox).Focus();
                         }
@@ -261,7 +262,7 @@ namespace sud
                         }
                         break;
                     case "Down":
-                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 9 <= 80)
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 9 <= 81)
                         {
                             (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) + 9).ToString()) as TextBox).Focus();
                         }
@@ -271,13 +272,13 @@ namespace sud
                         }
                         break;
                     case "Left":
-                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 >= 0)
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1 > 0)
                         {
                             (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) - 1).ToString()) as TextBox).Focus();
                         }
                         break;
                     case "Right":
-                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 1 <= 80)
+                        if (Convert.ToInt32((nowfocus).Name.Substring(2)) + 1 <= 81)
                         {
                             (FindName("tb" + (Convert.ToInt32((nowfocus).Name.Substring(2)) + 1).ToString()) as TextBox).Focus();
 
@@ -300,7 +301,7 @@ namespace sud
                 gsup.Color = Color.FromArgb(255, Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)), Convert.ToByte(170 - (149 * slider.Value)));
                 gsdw.Color = Color.FromArgb(255, Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)), Convert.ToByte(255 - (221 * slider.Value)));
                 title.Foreground = new SolidColorBrush(Color.FromArgb(255, Convert.ToByte(255 * slider.Value), Convert.ToByte(255 * slider.Value), Convert.ToByte(255 * slider.Value)));
-                for (int i = 0; i < 81; i++)
+                for (int i = 1; i <= 81; i++)
                 {
                     if (((FindName("tb" + i.ToString()) as TextBox).Background as SolidColorBrush).Color.G > 0)
                     {
